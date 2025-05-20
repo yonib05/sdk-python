@@ -9,7 +9,7 @@ on:
 
 jobs:
   unit-test:
-    name: Unit Tests - Python ${{ matrix.python-version }} - ${{ runner.os }}
+    name: Unit Tests - Python ${{ matrix.python-version }} - ${{ env.RUNNER_OS }}
     permissions:
       contents: read
     strategy:
