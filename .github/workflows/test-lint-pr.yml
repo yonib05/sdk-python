@@ -9,7 +9,7 @@ on:
 
 jobs:
   unit-test:
-    run-name: Unit Tests - Python ${{ matrix.python-version }} - ${{ github.env.RUNNER_OS }}
+    name: Unit Tests - Python ${{ matrix.python-version }} - ${{ github.env.RUNNER_OS }}
     permissions:
       contents: read
     strategy:
