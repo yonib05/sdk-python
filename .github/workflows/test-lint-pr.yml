@@ -6,10 +6,13 @@ on:
     types: [opened, synchronize, reopened, ready_for_review, review_requested, review_request_removed]
   push:
     branches: [ main ]  # Also run on direct pushes to main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   unit-test:
-    name: Unit Tests - Python ${{ matrix.python-version }} - ${{ github.env.RUNNER_OS }}
+    name: Unit Tests - Python ${{ matrix.python-version }} - ${{ matrix.os-name }}
     permissions:
       contents: read
     strategy:
@@ -17,26 +20,35 @@ jobs:
        include:
         # Linux
         - os: ubuntu-latest
+          os-name: 'linux'
           python-version: "3.10"
         - os: ubuntu-latest
+          os-name: 'linux'
           python-version: "3.11"
         - os: ubuntu-latest
+          os-name: 'linux'
           python-version: "3.12"
         - os: ubuntu-latest
+          os-name: 'linux'
           python-version: "3.13"
         # Windows
         - os: windows-latest
+          os-name: 'windows'
           python-version: "3.10"
         - os: windows-latest
+          os-name: 'windows'
           python-version: "3.11"
         - os: windows-latest
+          os-name: 'windows'
           python-version: "3.12"
         - os: windows-latest
+          os-name: 'windows'
           python-version: "3.13"
         # MacOS - latest only; not enough runners for macOS
         - os: macos-latest
+          os-name: 'macOS'
           python-version: "3.13"
-      fail-fast: false
+      fail-fast: true
     runs-on: ${{ matrix.os }}
     env:
       LOG_LEVEL: DEBUG
