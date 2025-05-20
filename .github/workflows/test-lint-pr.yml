@@ -36,7 +36,7 @@ jobs:
               pull_number: context.issue.number,
             });
             
-            console.log(commits[0].author);
+            console.log(commits[0].commit);
             
             const isApprovedContributor = APPROVED_ASSOCIATION.includes(PR_AUTHOR_ASSOCIATION);
             
