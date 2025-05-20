@@ -38,6 +38,7 @@ jobs:
             
             console.log(commits[0].commit);
             
+            
             const isApprovedContributor = APPROVED_ASSOCIATION.includes(PR_AUTHOR_ASSOCIATION);
             
             // Check if any contributor has approved                                                              
