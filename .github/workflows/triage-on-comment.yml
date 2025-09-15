@@ -25,7 +25,7 @@ jobs:
         with:
           script: |
             const issueNumber = context.issue.number;
-            const issueType = github.event.issue.pull_request ? 'PR' : 'Issue';
+            const issueType = context.payload.issue.pull_request ? 'PR' : 'Issue';
             
             // Skip if issue is a PR and not configured to support PR
             if (issueType === 'PR' && process.env.APPLY_TO_PULL_REQUESTS !== 'true'){
@@ -75,7 +75,7 @@ jobs:
           script: |
             const issueNumber = context.issue.number;
             const labelToAdd = '${{ steps.check-permissions.outputs.label-to-add }}';
-            const issueType = github.event.issue.pull_request ? 'PR' : 'Issue';
+            const issueType = context.payload.issue.pull_request ? 'PR' : 'Issue';
             
             // Get current labels
             const { data: issue } = await github.rest.issues.get({
