@@ -1,4 +1,4 @@
-                      name: Triage on Comment
+name: Triage on Comment
 
 on:
   issue_comment:
