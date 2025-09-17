@@ -49,8 +49,8 @@ jobs:
             if (permissionMode === 'users') {
               const teamUsernames = process.env.TEAM_USERNAMES;
               const userList = teamUsernames ? teamUsernames.split(',').map(u => u.trim()) : [];
-              hasWriteAccess = !userList.includes(context.actor);
-              console.log(`Username list mode - User ${context.actor} classified as: ${hasWriteAccess ? 'customer' : 'team member'}`);
+              hasWriteAccess = userList.includes(context.actor);
+              console.log(`Username list mode - User ${context.actor} classified as: ${hasWriteAccess ?  'team member' : 'customer}`);
             } else {
               const { data: permission } = await github.rest.repos.getCollaboratorPermissionLevel({
                 owner: context.repo.owner,
